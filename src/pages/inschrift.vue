@@ -2,9 +2,10 @@
   <q-page padding>
     <!-- content -->
     inschrift
+    <p> q-collapsible mit Tooltip</p>
 <q-btn icon="create" label="New item">
   <q-tooltip anchor="bottom middle" self="top left">
-    Some text as <b>content</b> of Tooltip <a href=""/>
+    Halloooooo WELT! :D <a href=""/>
   </q-tooltip>
 </q-btn>
   </q-page>
