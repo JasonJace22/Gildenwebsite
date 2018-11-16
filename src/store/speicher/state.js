@@ -1,5 +1,7 @@
 export default {
   //
+  fb: '',
+  fbStore: '',
   tranke: [
     {
       id: 0,

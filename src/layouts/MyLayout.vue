@@ -94,6 +94,9 @@ export default {
       this.$router.push('alchemie');
     },
   },
+  created: function setupFireBase() {
+    this.$store.dispatch('speicher/FirebaseSetup');
+  },
 };
 </script>
 
