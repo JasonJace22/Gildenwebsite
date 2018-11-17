@@ -7,7 +7,6 @@
         <q-btn
           flat
           dense
-          round
           @click="leftDrawerOpen = !leftDrawerOpen"
           aria-label="Menu"
         >
@@ -18,6 +17,12 @@
           NoName
           <div slot="subtitle">Alleria / Rexxar</div>
         </q-toolbar-title>
+        <q-btn
+        flat
+        label="login"
+        icon="mdi-duck">
+<!--  mdi-account-supervisor-circle -->
+        </q-btn>
       </q-toolbar>
     </q-layout-header>
 
@@ -75,11 +80,13 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+     <loginRegister />
   </q-layout>
 </template>
 
 <script>
 import { openURL } from 'quasar';
+import loginRegister from '../components/modals/loginRegister.vue';
 
 export default {
   name: 'MyLayout',
@@ -96,6 +103,9 @@ export default {
   },
   created: function setupFireBase() {
     this.$store.dispatch('speicher/FirebaseSetup');
+  },
+  components: {
+    loginRegister,
   },
 };
 </script>
