@@ -13,6 +13,7 @@ const routes = [
       { path: 'schmiede', component: () => import('pages/schmiede.vue') },
       { path: 'schneider', component: () => import('pages/schneider.vue') },
       { path: 'verzauber', component: () => import('pages/verzauber.vue') },
+      { path: 'noname', component: () => import('pages/noname.vue') },
     ],
   },
 ];

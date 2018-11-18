@@ -18,6 +18,7 @@
           <div slot="subtitle">Alleria / Rexxar</div>
         </q-toolbar-title>
         <q-btn
+        @click="startLogin = !startLogin"
         flat
         label="login"
         icon="mdi-duck">
@@ -34,7 +35,13 @@
         link
         inset-delimiter
       >
-        <q-item>
+      <q-list-header>Navigation</q-list-header>
+      <q-item to="/">
+          <q-item-side icon="mdi-escalator" />
+          <q-item-main label="Back to Start"/>
+        </q-item>
+      <q-list-header>Gilde</q-list-header>
+        <q-item to="noname">
           <q-item-side> <img style="width: 50px" src="statics/Turtle.png"/>
           </q-item-side>
           <q-item-main label="NoName"/>
@@ -80,7 +87,7 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-     <loginRegister />
+     <loginRegister :showModal = startLogin @closeModal = "startLogin = false" />
   </q-layout>
 </template>
 
@@ -93,13 +100,11 @@ export default {
   data() {
     return {
       leftDrawerOpen: this.$q.platform.is.desktop,
+      startLogin: false,
     };
   },
   methods: {
     openURL,
-    link2alchemie() {
-      this.$router.push('alchemie');
-    },
   },
   created: function setupFireBase() {
     this.$store.dispatch('speicher/FirebaseSetup');
