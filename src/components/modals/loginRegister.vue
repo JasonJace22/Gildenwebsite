@@ -4,26 +4,59 @@
       <q-tabs animated swipeable inverted color="purple-6" align="justify">
         <q-tab default name="tab1" slot="title" label="Login" />
         <q-tab name="tab2" slot="title" label="Bin ich neu hier" />
+<!-- Tab 1 -->
         <q-tab-pane name="tab1">
-           <q-input v-model="text"
-                    type="text"
-                    float-label="Benutzername"
-                    color="purple-6" clearable/>
-           <q-input v-model="password" color="purple-6"
-                    type="password" float-label="Passwort" clearable />
-          <div class="q-mt-md row">
-              <q-btn class ="q-mt-xs col-6" color="purple-6" label="Einloggen" />
-              <q-btn class ="q-mt-xs col-6" color="purple-6"
-                      @click="$emit('closeModal')" label="Doch nicht..." />
+
+          <q-field icon="mdi-account-circle" >
+              <q-input  v-model="text"
+                        type="text"
+                        color="purple-6"
+                        float-label="Benutzername"
+                        clearable
+                />
+          </q-field>
+          <q-field icon="mdi-lock-question" >
+              <q-input  v-model="password"
+                        type="password"
+                        color="purple-6"
+                        float-label="Passwort"
+                        clearable
+                          />
+                      </q-field>
+
+          <div class="q-mt-lg row">
+
+            <q-btn  label="Einloggen"
+                    class ="q-mt-xs col-6"
+                    color="purple-6"
+                    @click="startLogin"
+            />
+            <q-btn  label="Doch nicht..."
+                    class ="q-mt-xs col-6"
+                    color="purple-6"
+                    @click="$emit('closeModal')"
+            />
           </div>
         </q-tab-pane>
+<!-- Tab 2 -->
         <q-tab-pane name="tab2">
-<!-- -->
+
 <q-stepper ref="stepper" color="purple-9" v-model="currentStep">
 
   <!-- Step 1 -->
   <q-step default name ="1" title="First Step" subtitle="Deine Daten">
-    ...Step content, components, ...
+
+      <q-field icon="mdi-account-circle" >
+        <q-input v-model="text" color="grey-7" float-label="Benutzername" clearable />
+      </q-field>
+
+      <q-field icon="mdi-lock-question" >
+        <q-input v-model="text" color="grey-7" float-label="Passwort" clearable />
+      </q-field>
+
+      <q-field icon="mdi-lock-reset" >
+        <q-input v-model="text" color="grey-7" float-label="Passwort wiederholen" clearable />
+      </q-field>
   </q-step>
 
   <!-- Step 2 -->
@@ -63,7 +96,18 @@ export default {
       currentStep: '1',
     };
   },
+  methods: {
+    startLogin() {
+      console.log('einloggen');
+    },
+  },
 };
+// validations: {
+//   loginObjekt: {
+//    mail: { required, email };
+//    pw: { required, minLength: minLength(8) };
+//  },
+// };
 </script>
 
 <style>
