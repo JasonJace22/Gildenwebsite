@@ -75,7 +75,8 @@ module.exports = function (ctx) {
         'QField',
         'QStepper',
         'QStep',
-        'QStepperNavigation'
+        'QStepperNavigation',
+        'QSelect'
       ],
       directives: [
         'Ripple'

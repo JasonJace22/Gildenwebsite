@@ -24,6 +24,7 @@
           <q-field  icon="mdi-lock-question"
                     :error="$v.loginObjekt.pw.$error"
                     error-label="Gebe bitte dein richtiges Passwort ein"
+                    :count="8"
                     class="q-mr-xl q-ml-lg"
                     >
               <q-input  v-model="loginObjekt.pw"
@@ -73,26 +74,60 @@
                   clearable />
       </q-field>
 
-       <!-- Register.Passowort -->
-      <q-field icon="mdi-lock-question" >
-        <q-input  type="text"
+       <!-- Register.Passwort -->
+      <q-field  icon="mdi-lock-question"
+                :error="$v.registerPw.pw.$error"
+                error-label="Bitte gebe ein Passwort ein. Mindestlänge: 8"
+                :count="8"
+      >
+        <q-input  type="password"
                   color="grey-7"
                   float-label="Passwort"
+                  @blur="$v.registerPw.pw.$touch"
+                  v-model="registerPw.pw"
                   clearable />
       </q-field>
 
-       <!-- Register.Passowort.Wiederholen -->
-      <q-field icon="mdi-lock-reset" >
-        <q-input  type="text"
+       <!-- Register.Passwort.Wiederholen -->
+      <q-field  icon="mdi-lock-reset"
+                :error="$v.registerPw.pw2.$error"
+                error-label="Bitte wiederhole das gleiche Passwort wie oben"
+                :count="8"
+      >
+        <q-input  type="password"
                   color="grey-7"
                   float-label="Passwort wiederholen"
+                  @blur="$v.registerPw.pw2.$touch"
+                  v-model="registerPw.pw2"
                   clearable />
       </q-field>
   </q-step>
 
   <!-- Step 2 -->
-  <q-step title="Step 2" subtitle="und noch mehr">...</q-step>
+  <q-step title="Step 2" subtitle="und noch mehr">
 
+      <!-- Geschlecht -->
+                <q-field
+                  icon="mdi-gender-male-female"
+                  label="Geschlecht"
+                >
+                  <q-select
+                    color="positive"
+                    v-model="register.geschlecht"
+                    :options="[
+                                { label: 'Herr', value: 'herr' },
+                                { label: 'Frau', value: 'frau' },
+                                { label: 'Turtle', value: 'turtle' }
+                                ]"
+                  />
+                </q-field>
+
+      <!-- Dein.Name -->
+      <!-- Geburtstag -->
+      <!-- Charaktername -->
+      <!-- Rasse -->
+      <!-- Klasse -->
+      </q-step>
   <!-- Step 3 -->
   <q-step title="Step 3" subtitle="Passt auch alles?">...</q-step>
 
@@ -109,12 +144,20 @@
     />
   </q-stepper-navigation>
 </q-stepper>
-<!-- -->
-<q-btn class ="q-mt-xs col-6" color="positive"
-                      @click="startRegister" label="ja man!" />
-
-          <q-btn class ="q-mt-xs col-6" color="negative"
-                      @click="$emit('closeModal')" label="Doch nicht" />
+    <!-- Positive.Button -->
+<div class="row">
+    <q-btn  class ="q-mt-sm q-mr-auto col-6"
+            color="positive"
+            @click="startRegister"
+            label="ja man!"
+            />
+    <!-- Positive.Button -->
+      <q-btn  class ="q-mt-sm col-6"
+              color="negative"
+              @click="$emit('closeModal')"
+              label="Doch nicht"
+              />
+      </div>
         </q-tab-pane>
       </q-tabs>
       </div>
@@ -131,16 +174,21 @@ export default {
     return {
       currentStep: '1',
 
+      select: 'herr',
+
       loginObjekt: {
         mail: '',
         pw: '',
       },
-      registerInfo: {
+
+      registerPw: {
         pw: '',
         pw2: '',
       },
+
       register: {
         mail: '',
+        geschlecht: 'herr',
       },
     };
   },
@@ -157,7 +205,7 @@ export default {
       mail: { required, email },
       pw: { required, minLength: minLength(8) },
     },
-    registerInfo: {
+    registerPw: {
       pw: { required, minLength: minLength(8) },
       pw2: { required, sameAsPassword: sameAs('pw') },
     },
