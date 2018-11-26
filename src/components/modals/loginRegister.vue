@@ -15,7 +15,7 @@
               <q-input  v-model="loginObjekt.mail"
                         @blur="$v.loginObjekt.mail.$touch"
                         type="email"
-                        color="purple-6"
+                        color="positive"
                         float-label="E-Mail"
                         clearable
                         />
@@ -30,7 +30,7 @@
               <q-input  v-model="loginObjekt.pw"
                         @blur="$v.loginObjekt.pw.$touch"
                         type="password"
-                        color="purple-6"
+                        color="positive"
                         float-label="Passwort"
                         clearable
                         />
@@ -107,25 +107,76 @@
   <q-step title="Step 2" subtitle="und noch mehr">
 
       <!-- Geschlecht -->
-                <q-field
-                  icon="mdi-gender-male-female"
-                  label="Geschlecht"
-                >
-                  <q-select
-                    color="positive"
-                    v-model="register.geschlecht"
-                    :options="[
-                                { label: 'Herr', value: 'herr' },
-                                { label: 'Frau', value: 'frau' },
-                                { label: 'Turtle', value: 'turtle' }
-                                ]"
-                  />
-                </q-field>
+            <q-field
+              icon="mdi-gender-male-female"
+              label="Geschlecht"
+            >
+              <q-select
+                color="positive"
+                v-model="register.geschlecht"
+                :options="[
+                            { label: 'Herr', value: 'herr' },
+                            { label: 'Frau', value: 'frau' },
+                            { label: 'Turtle', value: 'turtle' }
+                            ]"
+              />
+            </q-field>
 
       <!-- Dein.Name -->
+            <q-field icon="mdi-account-card-details"
+                      label="Name"
+                      class="q-mt-md"
+                >
+                  <q-input  type="text"
+                            class="q-ma-xs"
+                            color="grey-7"
+                            v-model="register.name"
+                            @blur="$v.register.name.$touch"
+                            clearable
+                  />
+              </q-field>
+
       <!-- Geburtstag -->
+            <q-field  icon="mdi-cake-variant"
+                      label="Geburtstag"
+            >
+              <q-datetime type="date"
+                          v-model="register.bday"
+                          color="secondary"
+                          float-label="yyyy.mm.dd"
+                          :max="new Date()"
+              />
+            </q-field>
+
       <!-- Charaktername -->
+                  <q-field  icon="mdi-account-circle"
+                            label="Charaktername"
+                            class="q-mt-md"
+                >
+                  <q-input  type="text"
+                            class="q-ma-xs"
+                            color="grey-7"
+                            v-model="register.char"
+                            clearable
+                  />
+              </q-field>
+
       <!-- Rasse -->
+            <q-field
+              icon="mdi-gender-male-female"
+              label="Rasse"
+            >
+              <q-select
+                color="positive"
+                v-model="register.rasse"
+                :options="[
+                            { label: 'Herr', value: 'herr' },
+                            { label: 'Frau', value: 'frau' },
+                            { label: 'Turtle', value: 'turtle' }
+                            ]"
+              />
+            </q-field>
+
       <!-- Klasse -->
       </q-step>
   <!-- Step 3 -->
@@ -189,6 +240,10 @@ export default {
       register: {
         mail: '',
         geschlecht: 'herr',
+        name: '',
+        bday: '',
+        char: '',
+        rasse: 'herr',
       },
     };
   },
@@ -211,6 +266,8 @@ export default {
     },
     register: {
       mail: { required, email },
+      name: { required },
+      bday: { required },
     },
   },
 // niemals untere klammer löschen !!! never ever
