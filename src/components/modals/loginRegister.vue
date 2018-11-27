@@ -170,17 +170,42 @@
                 color="positive"
                 v-model="register.rasse"
                 :options="[
-                            { label: 'Herr', value: 'herr' },
-                            { label: 'Frau', value: 'frau' },
-                            { label: 'Turtle', value: 'turtle' }
+                            { label: 'Mensch', value: 'mensch' },
+                            { label: 'Gnom', value: 'gnom' },
+                            { label: 'Zwerg', value: 'Zwerg' }
                             ]"
               />
             </q-field>
 
       <!-- Klasse -->
+                  <q-field
+              icon="mdi-gender-male-female"
+              label="Klasse"
+            >
+              <q-select
+                color="positive"
+                v-model="register.klasse"
+                :options="[
+                            { label: 'Krieger', value: 'krieger' },
+                            { label: 'Paladin', value: 'paladin' },
+                            { label: 'Druide', value: 'druide' }
+                            ]"
+              />
+            </q-field>
       </q-step>
+
   <!-- Step 3 -->
-  <q-step title="Step 3" subtitle="Passt auch alles?">...</q-step>
+  <q-step title="Step 3" subtitle="Passt auch alles?">
+    Überprüfe deine eingegebenen Daten:
+    <ul>
+    <li>{{register.geschlecht}}</li>
+    <li>{{register.name}}</li>
+    <li>{{register.bday}}</li>
+    <li>{{register.char}}</li>
+    <li>{{register.rasse}}</li>
+    <li>{{register.klasse}}</li>
+    </ul>
+    </q-step>
 
   <!-- weiteres -->
   <q-stepper-navigation>
@@ -243,7 +268,8 @@ export default {
         name: '',
         bday: '',
         char: '',
-        rasse: 'herr',
+        rasse: 'mensch',
+        klasse: 'krieger',
       },
     };
   },
