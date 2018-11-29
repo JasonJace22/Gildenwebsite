@@ -59,7 +59,7 @@
 <q-stepper ref="stepper" color="purple-9" v-model="currentStep">
 
   <!-- Step 1 -->
-  <q-step default name ="1" title="First Step" subtitle="Deine Daten">
+  <q-step default name ="first" title="First Step" subtitle="Deine Daten">
 
         <!-- Register.Mail -->
       <q-field  icon="mdi-account-circle"
@@ -104,28 +104,11 @@
   </q-step>
 
   <!-- Step 2 -->
-  <q-step title="Step 2" subtitle="und noch mehr">
-
-      <!-- Geschlecht -->
-            <q-field
-              icon="mdi-gender-male-female"
-              label="Geschlecht"
-            >
-              <q-select
-                color="positive"
-                v-model="register.geschlecht"
-                :options="[
-                            { label: 'Herr', value: 'herr' },
-                            { label: 'Frau', value: 'frau' },
-                            { label: 'Turtle', value: 'turtle' }
-                            ]"
-              />
-            </q-field>
+  <q-step title="Step 2" subtitle="und noch mehr" :order="2">
 
       <!-- Dein.Name -->
-            <q-field icon="mdi-account-card-details"
+            <q-field  icon="mdi-account-card-details"
                       label="Name"
-                      class="q-mt-md"
                 >
                   <q-input  type="text"
                             class="q-ma-xs"
@@ -135,6 +118,21 @@
                             clearable
                   />
               </q-field>
+
+      <!-- Geschlecht -->
+            <q-field  icon="mdi-gender-male-female"
+                      label="Geschlecht"
+                      class="q-mt-md"
+            >
+              <q-select color="positive"
+                        v-model="register.geschlecht"
+                        :options="[
+                            { label: 'Herr', value: 'herr' },
+                            { label: 'Frau', value: 'frau' },
+                            { label: 'Turtle', value: 'turtle' }
+                            ]"
+              />
+            </q-field>
 
       <!-- Geburtstag -->
             <q-field  icon="mdi-cake-variant"
@@ -147,6 +145,10 @@
                           :max="new Date()"
               />
             </q-field>
+      </q-step>
+
+    <!-- Step 3 -->
+    <q-step title="Step 3" subtitle="Ingame Daten" :order="3">
 
       <!-- Charaktername -->
                   <q-field  icon="mdi-account-circle"
@@ -161,41 +163,39 @@
                   />
               </q-field>
 
-      <!-- Rasse -->
-            <q-field
-              icon="mdi-gender-male-female"
-              label="Rasse"
-            >
-              <q-select
-                color="positive"
-                v-model="register.rasse"
-                :options="[
-                            { label: 'Mensch', value: 'mensch' },
-                            { label: 'Gnom', value: 'gnom' },
-                            { label: 'Zwerg', value: 'Zwerg' }
-                            ]"
-              />
-            </q-field>
-
       <!-- Klasse -->
-                  <q-field
-              icon="mdi-gender-male-female"
-              label="Klasse"
+                  <q-field  icon="mdi-gender-male-female"
+                            label="Klasse"
+                            class="q-mt-md"
             >
-              <q-select
-                color="positive"
-                v-model="register.klasse"
-                :options="[
+              <q-select color="positive"
+                        v-model="register.klasse"
+                        :options="[
                             { label: 'Krieger', value: 'krieger' },
                             { label: 'Paladin', value: 'paladin' },
                             { label: 'Druide', value: 'druide' }
                             ]"
               />
             </q-field>
-      </q-step>
 
-  <!-- Step 3 -->
-  <q-step title="Step 3" subtitle="Passt auch alles?">
+      <!-- Rasse -->
+            <q-field  icon="mdi-gender-male-female"
+                      label="Rasse"
+                      class="q-mt-md"
+            >
+              <q-select color="positive"
+                        v-model="register.rasse"
+                        :options="[
+                            { label: 'Mensch', value: 'mensch' },
+                            { label: 'Gnom', value: 'gnom' },
+                            { label: 'Zwerg', value: 'Zwerg' }
+                            ]"
+              />
+            </q-field>
+ </q-step>
+
+  <!-- Step 4 -->
+  <q-step title="Step 4" subtitle="Passt auch alles?" :order="4">
     Überprüfe deine eingegebenen Daten:
     <ul>
     <li>{{register.geschlecht}}</li>
@@ -204,6 +204,11 @@
     <li>{{register.char}}</li>
     <li>{{register.rasse}}</li>
     <li>{{register.klasse}}</li>
+    <q-btn
+          color="yellow"
+          @click="currentStep = 'first'"
+          label="Go to Step 2"
+        />
     </ul>
     </q-step>
 
@@ -248,7 +253,7 @@ export default {
   props: ['showModal'],
   data() {
     return {
-      currentStep: '1',
+      currentStep: 'first',
 
       select: 'herr',
 
