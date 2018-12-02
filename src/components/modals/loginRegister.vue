@@ -1,5 +1,5 @@
 <template>
-    <q-modal @hide="$emit('closeModal')" :value= "showModal">
+    <q-modal content-classes="loginmodal" @hide="$emit('closeModal')" :value= "showModal">
       <div>
       <q-tabs animated swipeable inverted color="purple-6" align="justify">
         <q-tab default name="tab1" slot="title" label="Login" />
@@ -104,7 +104,7 @@
   </q-step>
 
   <!-- Step 2 -->
-  <q-step title="Step 2" subtitle="und noch mehr" :order="2">
+  <q-step title="Step 2" name ="second" subtitle="und noch mehr" :order="2">
 
       <!-- Dein.Name -->
             <q-field  icon="mdi-account-card-details"
@@ -148,7 +148,7 @@
       </q-step>
 
     <!-- Step 3 -->
-    <q-step title="Step 3" subtitle="Ingame Daten" :order="3">
+    <q-step title="Step 3" name ="third" subtitle="Ingame Daten" :order="3">
 
       <!-- Charaktername -->
                   <q-field  icon="mdi-account-circle"
@@ -196,20 +196,64 @@
 
   <!-- Step 4 -->
   <q-step title="Step 4" subtitle="Passt auch alles?" :order="4">
-    Überprüfe deine eingegebenen Daten:
-    <ul>
-    <li>{{register.geschlecht}}</li>
-    <li>{{register.name}}</li>
-    <li>{{register.bday}}</li>
-    <li>{{register.char}}</li>
-    <li>{{register.rasse}}</li>
-    <li>{{register.klasse}}</li>
-    <q-btn
-          color="yellow"
+    <div class="row">
+
+    <q-card inline color="blue-1" class="text-black col-12">
+      <q-card-title>
+        First Step
+      </q-card-title>
+      <q-card-main>
+        E-Mail Adresse: {{register.mail}}
+      </q-card-main>
+      <q-card-separator />
+          <span class="q-ma-sm">Du möchtest etwas ändern?</span>
+        <q-btn
+          class="q-ma-xs"
+          color="indigo-6"
           @click="currentStep = 'first'"
+          label="Go to Step 1"
+        />
+    </q-card>
+
+    <q-card inline color="blue-1" class="q-mt-md text-black col-12">
+      <q-card-title>
+        Step 2
+      </q-card-title>
+      <q-card-main>
+        <p /><b>Dein Name:</b> {{register.name}}
+        <p /><b>Dein Geschlecht:</b> {{register.geschlecht}}
+        <p /><b>Dein Geburtstag:</b> {{register.bday}}
+      </q-card-main>
+      <q-card-separator />
+        <span class="q-ma-sm">Du möchtest etwas ändern?</span>
+        <q-btn
+          class="q-ma-xs"
+          color="indigo-6"
+          @click="currentStep = 'second'"
           label="Go to Step 2"
         />
-    </ul>
+    </q-card>
+
+<q-card inline color="blue-1" class="q-mt-md text-black col-12">
+      <q-card-title>
+        Step 3
+      </q-card-title>
+      <q-card-main>
+    <p>{{register.char}}</p>
+    <p>{{register.rasse}}</p>
+    <p>{{register.klasse}}</p>
+      </q-card-main>
+      <q-card-separator />
+      <span class="q-ma-sm">Du möchtest etwas ändern?</span>
+        <q-btn
+          class="q-ma-xs"
+          color="indigo-6"
+          @click="currentStep = 'third'"
+          label="Go to Step 3"
+        />
+    </q-card>
+
+</div>
     </q-step>
 
   <!-- weiteres -->
@@ -306,4 +350,8 @@ export default {
 </script>
 
 <style>
+      .loginmodal {
+      max-width:700px;
+      width: 100%
+      };
 </style>
